@@ -11,7 +11,7 @@ DEVICE  = attiny45
 F_CPU   = 16500000
 FUSE_L  = 0xe1
 FUSE_H  = 0xdd
-AVRDUDE = avrdude -c avrisp2 -P usb -p $(DEVICE) # edit this line for your programmer
+AVRDUDE = avrdude -c arduino -P /dev/ttyACM0 -p $(DEVICE) -b 9600 # edit this line for your programmer
 
 CFLAGS  = -Iusbdrv -I. -DDEBUG_LEVEL=0
 OBJECTS = usbdrv/usbdrv.o usbdrv/usbdrvasm.o usbdrv/oddebug.o main.o
