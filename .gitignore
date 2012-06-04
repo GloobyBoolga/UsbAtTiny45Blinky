@@ -1,4 +1,4 @@
 .svn
-.o
-.so
-.hex
+*.o
+*.so
+*.hex
