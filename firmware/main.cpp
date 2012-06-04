@@ -76,15 +76,11 @@ extern "C" usbMsgLen_t usbFunctionSetup(uchar data[8])
 	{
 		switch(rq->bRequest)
 		{
-		case CUSTOM_RQ_SET_RED:
+		case CUSTOM_RQ_SET_RGB:
 			r = rq->wValue.bytes[0];
-			break;	
-		case CUSTOM_RQ_SET_GREEN:
-			g = rq->wValue.bytes[0];
-			break;	
-		case CUSTOM_RQ_SET_BLUE:
-			b = rq->wValue.bytes[0];
-			break;	
+			g = rq->wValue.bytes[1];
+			b = rq->wIndex.bytes[0];
+			break;
 		}
     }
 	else
@@ -102,7 +98,7 @@ static void calibrateOscillator(void)
 uchar       step = 128;
 uchar       trialValue = 0, optimumValue;
 int         x, optimumDev, targetValue = (unsigned)(1499 * (double)F_CPU / 10.5e6 + 0.5);
- 
+
     /* do a binary search: */
     do{
         OSCCAL = trialValue + step;
@@ -126,7 +122,7 @@ int         x, optimumDev, targetValue = (unsigned)(1499 * (double)F_CPU / 10.5e
     }
     OSCCAL = optimumValue;
 }
- 
+
 
 extern "C" void usbEventResetReady(void)
 {
@@ -139,29 +135,29 @@ extern "C" void usbEventResetReady(void)
 /* ------------------------------------------------------------------------- */
 void update_leds()
 {
-  if (++count == 0) {    
+  if (++count == 0) {
     rb = r;
     gb = g;
     bb = b;
     // check if switch on r, g and b
-    if (rb > 0) {        
+    if (rb > 0) {
       PORTB |= (1 << R_BIT);
-    } 
+    }
     if (gb > 0) {
       PORTB |= (1 << G_BIT);
-    } 
+    }
     if (bb > 0) {
       PORTB |= (1 << B_BIT);
-    } 
+    }
   }
   // check if switch off r, g and b
-  if (count == rb) {     
+  if (rb != 255 && count == rb) {
     PORTB &= ~(1 << R_BIT);
   }
-  if (count == gb) {
+  if (gb != 255 && count == gb) {
     PORTB &= ~(1 << G_BIT);
   }
-  if (count == bb) {
+  if (bb != 255 && count == bb) {
     PORTB &= ~(1 << B_BIT);
   }
 }
@@ -190,12 +186,12 @@ int main(void)
     LED_PORT_DDR |= _BV(R_BIT);   /* make the LED bit an output */
     LED_PORT_DDR |= _BV(G_BIT);   /* make the LED bit an output */
     LED_PORT_DDR |= _BV(B_BIT);   /* make the LED bit an output */
-	
+
     sei();
 
     for(;;){                /* main event loop */
 		update_leds();
-		
+
         wdt_reset();
         usbPoll();
     }
