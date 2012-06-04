@@ -200,24 +200,25 @@ section at the end of this file).
  */
 
 /* -------------------------- Device Description --------------------------- */
+/* abgrall.jp's own VID:PID 20A0:41A5 */
 
-#define  USB_CFG_VENDOR_ID       0xc0, 0x16
+#define  USB_CFG_VENDOR_ID       0xa0, 0x20
 /* USB vendor ID for the device, low byte first. If you have registered your
  * own Vendor ID, define it here. Otherwise you use one of obdev's free shared
  * VID/PID pairs. Be sure to read USBID-License.txt for rules!
  */
-#define  USB_CFG_DEVICE_ID       0xdf, 0x05 /* obdev's shared PID for HIDs */
+#define  USB_CFG_DEVICE_ID       0xa5, 0x41
 /* This is the ID of the product, low byte first. It is interpreted in the
  * scope of the vendor ID. If you have registered your own VID with usb.org
  * or if you have licensed a PID from somebody else, define it here. Otherwise
  * you use obdev's free shared VID/PID pair. Be sure to read the rules in
  * USBID-License.txt!
  */
-#define USB_CFG_DEVICE_VERSION  0x00, 0x02
+#define USB_CFG_DEVICE_VERSION  0x00, 0x1
 /* Version number of the device: Minor number first, then major number.
  */
-#define USB_CFG_VENDOR_NAME     'd', 'a', 'v', 'e', '.', 'h' 
-#define USB_CFG_VENDOR_NAME_LEN 6
+#define USB_CFG_VENDOR_NAME     'j', 'p', 'a', '@'
+#define USB_CFG_VENDOR_NAME_LEN 4
 /* These two values define the vendor name returned by the USB device. The name
  * must be given as a list of characters under single quotes. The characters
  * are interpreted as Unicode (UTF-16) entities.
