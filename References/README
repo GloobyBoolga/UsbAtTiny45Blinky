@@ -1,0 +1,7 @@
+2012-06-02
+These are some reference projects I copy-pasted from to make USB LED notifier.
+
+vusb from http://www.obdev.at/products/vusb/index.html working for the wiring 
+
+  svn checkout http://avr-usb-rgb-led.googlecode.com/svn/trunk/ avr-usb-rgb-led-read-only 
+
