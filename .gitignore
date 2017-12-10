@@ -2,3 +2,6 @@
 *.o
 *.so
 *.hex
+*~
+commandline/set-led
+firmware/main.elf
